@@ -125,7 +125,6 @@ Commands:
   sync     Force a sync of the local cache of the GitHub / Snyk data.
   tags     Returns list of project id's and the tags said projects are...
   targets  Returns valid input for api-import to consume
-    
 ```
 
 targets command:
