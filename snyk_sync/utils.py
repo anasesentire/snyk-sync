@@ -231,7 +231,7 @@ def default_settings(
         if token_env_name in environ.keys():
             token = environ[token_env_name]
         else:
-            raise Exception(f"Environment Variable {token_env_name} for {name}is not set properly and required")
+            raise Exception(f"Environment Variable {token_env_name} for {name} is not set properly and required")
 
         return token
 
@@ -242,10 +242,20 @@ def default_settings(
         if token_env_name in environ.keys():
             token = environ[token_env_name]
         else:
-            raise Exception(f"Environment Variable {token_env_name} for {name}is not set properly and required")
+            raise Exception(f"Environment Variable {token_env_name} for {name} is not set properly and required")
 
         return token
 
+    if name == "github_url":
+
+        github_url_env_name = s["github_url_env_name"]
+
+        if github_url_env_name in environ.keys():
+            github_url = environ[github_url_env_name]
+        else:
+            raise Exception(f"Environment Variable {github_url_env_name} for {name} is not set properly and required")
+
+        return github_url
     if name == "default_org":
         return s["default"]["orgName"]
 

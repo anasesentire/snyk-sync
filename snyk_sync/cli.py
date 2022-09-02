@@ -162,6 +162,12 @@ def main(
         envvar="GITHUB_TOKEN",
         callback=settings_callback,
     ),
+    github_url: str = typer.Option(
+        default=None,
+        help="GitHub Enterprise Server URL, if not set here will load from ENV VAR named in snyk-sync.yaml",
+        envvar="GITHUB_URL",
+        callback=settings_callback,
+    ),
 ):
 
     # We keep this as the global settings hash
@@ -203,7 +209,11 @@ def sync(
 
     GH_PAGE_LIMIT = 100
 
-    gh = Github(s.github_token, per_page=GH_PAGE_LIMIT)
+    if s.github_url is not None:
+        gh = Github(base_url=s.github_url, login_or_token=s.github_token, per_page=GH_PAGE_LIMIT)
+    else:
+        gh = Github(s.github_token, per_page=GH_PAGE_LIMIT)
+
 
     client = SnykClient(str(s.snyk_token), user_agent=f"pysnyk/snyk_services/sync/{__version__}", tries=2, delay=1)
 

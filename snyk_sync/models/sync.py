@@ -32,6 +32,7 @@ class Settings(BaseModel):
     snyk_group: Optional[UUID4]
     snyk_token: Optional[UUID4]
     github_token: Optional[str]
+    github_url: Optional[str]
     github_orgs: List[str] = list()
     cache_timeout: Optional[float]
     instance: Optional[str]

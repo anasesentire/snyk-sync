@@ -3,6 +3,7 @@ default:
   orgName: ie-playground
 github_orgs:
   - snyk-playground
+github_url_env_name: GITHUB_URL
 schema: 2
 snyk:
   groups:
