@@ -95,33 +95,40 @@ Base snyk-sync flags/environment variables
 Usage: cli.py [OPTIONS] COMMAND [ARGS]...
 
 Options:
-  --cache-dir DIRECTORY    Cache location  [env var: SNYK_SYNC_CACHE_DIR;
-                           default: cache]
+  --conf FILE              [env var: SNYK_SYNC_CONFIG; default: snyk-
+                           sync.yaml]
+  --cache-dir DIRECTORY    Cache location  [env var: SNYK_SYNC_CACHE_DIR]
   --cache-timeout INTEGER  Maximum cache age, in minutes  [env var:
                            SNYK_SYNC_CACHE_TIMEOUT; default: 60]
   --forks / --no-forks     Check forks for import.yaml files  [env var:
                            SNYK_SYNC_FORKS; default: no-forks]
-  --conf FILE              [env var: SNYK_SYNC_CONFIG; default: snyk-
-                           sync.yaml]
-  --targets-file FILE      [env var: SNYK_SYNC_TARGETS_FILE]
+  --targets-dir DIRECTORY  [env var: SNYK_SYNC_TARGETS_DIR]
+  --tags-dir DIRECTORY     [env var: SNYK_SYNC_TAGS_DIR]
   --snyk-orgs-file FILE    Snyk orgs to watch  [env var: SNYK_SYNC_ORGS]
   --default-org TEXT       Default Snyk Org to use from Orgs file.  [env var:
                            SNYK_SYNC_DEFAULT_ORG]
   --default-int TEXT       Default Snyk Integration to use with Default Org.
                            [env var: SNYK_SYNC_DEFAULT_INT]
-  --snyk-group UUID        Group ID, required but will scrape from ENV  [env
-                           var: SNYK_SYNC_GROUP; required]
-  --snyk-token UUID        Snyk access token  [env var: SNYK_TOKEN; required]
+  --instance TEXT          Default Snyk Integration to use with Default Org.
+                           [env var: SNYK_SYNC_INSTANCE]
+  --snyk-token UUID        Snyk access token, if not loaded from Env it will
+                           attempt to load from first group  [env var:
+                           SNYK_TOKEN]
   --sync                   Forces a sync regardless of cache status
-  --github-token TEXT      GitHub access token  [env var: GITHUB_TOKEN;
-                           required]
+  --github-token TEXT      GitHub access token, if not set here will load from
+                           ENV VAR named in snyk-sync.yaml  [env var:
+                           GITHUB_TOKEN]
+  --github-url TEXT        GitHub Base URL as:'https://hostname/api/v3', if
+                           not set here will load from ENV VAR named in snyk-
+                           sync.yaml  [env var: GITHUB_URL]
   --help                   Show this message and exit.
 
 Commands:
-  status   Return if the cache is out of date
-  sync     Force a sync of the local cache of the GitHub / Snyk data.
-  tags     Returns list of project id's and the tags said projects are...
-  targets  Returns valid input for api-import to consume
+  autoconf  Autogenerates a configuration template given an orgname
+  status    Return if the cache is out of date
+  sync      Force a sync of the local cache of the GitHub / Snyk data.
+  tags      Returns list of project id's and the tags said projects are...
+  targets   Returns valid input for api-import to consume
 ```
 
 targets command:
@@ -163,7 +170,7 @@ docker push ghcr.io/snyk-playground/snyk-sync:latest
 ```
 docker pull ghcr.io/snyk-playground/snyk-sync:latest
 docker tag ghcr.io/snyk-playground/snyk-sync:latest snyk-sync:latest
-docker run --rm -it -e GITHUB_TOKEN -e SNYK_TOKEN -v "${PWD}":/runtime snyk-sync:latest --sync target
+docker run --rm -it -e GITHUB_TOKEN -e SNYK_TOKEN -v "${PWD}":/runtime snyk-sync:latest --sync targets
 ```
 
 ### Using a custom CA Root Certificate / proxies

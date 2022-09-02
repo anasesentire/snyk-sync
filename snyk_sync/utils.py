@@ -248,6 +248,10 @@ def default_settings(
 
     if name == "github_url":
 
+        #if github_url_env_name not specified in snyk-snyc.yml, don't force check on env variable
+        if 'github_url_env_name' not in s.keys():
+            return None
+
         github_url_env_name = s["github_url_env_name"]
 
         if github_url_env_name in environ.keys():
@@ -256,6 +260,7 @@ def default_settings(
             raise Exception(f"Environment Variable {github_url_env_name} for {name} is not set properly and required")
 
         return github_url
+
     if name == "default_org":
         return s["default"]["orgName"]
 

@@ -164,7 +164,7 @@ def main(
     ),
     github_url: str = typer.Option(
         default=None,
-        help="GitHub Enterprise Server URL, if not set here will load from ENV VAR named in snyk-sync.yaml",
+        help="GitHub Base URL as:'https://hostname/api/v3', if not set here will load from ENV VAR named in snyk-sync.yaml",
         envvar="GITHUB_URL",
         callback=settings_callback,
     ),
