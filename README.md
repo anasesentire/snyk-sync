@@ -169,6 +169,16 @@ docker tag ghcr.io/snyk-playground/snyk-sync:latest snyk-sync:latest
 docker run --rm -it -e GITHUB_TOKEN -e SNYK_TOKEN -v "${PWD}":/runtime snyk-sync:latest --sync targets
 ```
 
+### Using a custom github url for Github Enterprise
+
+A custom url can be set as an evironment variable: `export GITHUB_URL=https://hostname/api/v3`
+
+ ```
+ docker run --rm -it -e GITHUB_TOKEN -e SNYK_TOKEN -e GITHUB_URL-v "${PWD}":/runtime snyk-sync:latest --sync targets
+ ```
+
+ If environment variable not set, default (github.com) will be used. `github_url_env_name: GITHUB_URL` can be set in `snyk-sync.yml` to force checking for the custom url.
+
 ### Using a custom CA Root Certificate / proxies
 
 If using a proxy, ensure that you are passing HTTP_PROXY and HTTPS_PROXY environment variables to the container runtimes.
