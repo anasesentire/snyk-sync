@@ -424,9 +424,7 @@ def targets(
         load_conf()
         tmp_watch: SnykWatchList = load_watchlist(s.cache_dir)
         watchlist.repos = tmp_watch.repos
-
-    # print(f"{watchlist=}")
-
+        
     all_orgs = Orgs(cache=str(s.cache_dir), groups=s.snyk_groups)
 
     all_orgs.load()

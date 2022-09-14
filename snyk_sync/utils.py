@@ -68,8 +68,6 @@ def newer(cached: str, remote: str) -> bool:
     cache_ts = datetime.strptime(cached, "%Y-%m-%d %H:%M:%S")
     remote_ts = datetime.strptime(remote, "%Y-%m-%d %H:%M:%S")
 
-    # print(cache_ts, remote_ts)
-
     return bool(remote_ts < cache_ts)
 
 

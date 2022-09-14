@@ -219,7 +219,6 @@ class Repo(BaseModel):
 
                 # if we have any other values, we will update that also
                 if isinstance(v, dict):
-
                     if "orgName" in v.keys():
                         if v["orgName"] in snyk_orgs.keys():
                             org_name = v["orgName"]
